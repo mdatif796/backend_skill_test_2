@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/sign_up.css">
+
+<div class="sign-up-container">
+    <div class="sign-up">
+        <h1 class="heading">Sign Up</h1>
+        <form action="/users/create-user" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="password" name="password" placeholder="Your Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <button>Sign Up</button>
+        </form>
+        <a id="a-google" href="/users/auth/google">
+            <div id="google-sign-in">
+                <div id="google-icon">
+                    <img src="/images/google.png" alt="">
+                </div>
+                <div id="google-name">
+                        <p>Sign up with google</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

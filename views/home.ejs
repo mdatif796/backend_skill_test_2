@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<div id="header">
+    <h1 class="heading"><a href="/">Auth</a></h1>
+    <% if(locals.user){ %>
+        <div class="header-part">
+            <a href="/users/sign-in/reset-password-page">Reset Password</a>
+            <h3><a href="/users/sign-out">Sign Out</a></h3>
+        </div>
+        <% }else{ %>
+            <div class="header-part">
+                <a href="/users/sign-in">Sign In</a>
+                <a href="/users/sign-up">Sign Up</a>
+            </div>
+    <% } %> 
+</div>
