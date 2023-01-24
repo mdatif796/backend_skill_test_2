@@ -129,11 +129,6 @@ module.exports.forgetPasswordEmail = async (req, res) => {
       return res.redirect("back");
     }
 
-    if (req.user && user.email !== req.user.email) {
-      req.flash("success", "Email does not match with logged in user");
-      return res.redirect("back");
-    }
-
     let token = await Token.findOne({ userId: user._id });
     if (!token) {
       token = await Token.create({
@@ -195,11 +190,11 @@ module.exports.forgetPasswordVerify = async (req, res) => {
   bcrypt.genSalt(10, (err, Salt) => {
     bcrypt.hash(req.body.password, Salt, async (err, hash) => {
       user.password = hash;
+      await user.save();
+      await token.delete();
+
+      req.flash("success", "Password Changed Successfully!");
+      return res.redirect("/");
     });
   });
-  await user.save();
-  await token.delete();
-
-  req.flash("success", "Password Changed Successfully!");
-  return res.redirect("/");
 };
