@@ -14,4 +14,6 @@
     * CLIENTSECRET={Your client secret of google oauth}
     * CALLBACKURL={Your callback url}
     * EMAILPASS={Your email password from which you are sending mail}
+    * CAPTCHA_SITE_KEY={Your google captcha site key}
+    * CAPTCHA_SECRET_KEY={Your google captcha secret key}
 4. and then write "npm start" and then enter, it will start the server on port 8000.
