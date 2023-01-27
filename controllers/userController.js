@@ -3,6 +3,7 @@ const Token = require("../models/token");
 const crypto = require("crypto");
 const queue = require("../config/kue");
 const bcrypt = require("bcryptjs");
+require("dotenv").config();
 const forgetPasswordMailer = require("../workers/forgetPassword_emails_worker");
 
 // render the sign-in page
@@ -13,7 +14,9 @@ module.exports.sign_in = function (req, res) {
     return res.redirect("/");
   }
   // if the user is not signed in
-  return res.render("sign_in");
+  return res.render("sign_in", {
+    site_key: process.env.CAPTCHA_SITE_KEY,
+  });
 };
 
 // render the sign-up page
@@ -24,12 +27,33 @@ module.exports.sign_up = function (req, res) {
     return res.redirect("/");
   }
   // if the user is not signed in
-  return res.render("sign_up");
+  return res.render("sign_up", {
+    site_key: process.env.CAPTCHA_SITE_KEY,
+  });
 };
 
 // controller for creating a user
 module.exports.create_user = async function (req, res) {
   try {
+    // google captcha verification
+    const response_key = req.body["g-recaptcha-response"];
+    const secret_key = process.env.CAPTCHA_SECRET_KEY;
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`;
+    fetch(url, {
+      method: "post",
+    })
+      .then((response) => response.json())
+      .then(async (google_response) => {
+        // google_response is the object return by
+        // google as a response
+        if (google_response.success == true) {
+          //   if captcha is verified
+        } else {
+          // if captcha is not verified
+          req.flash("error", "captcha not verified!!");
+          return res.redirect("/users/sign-in");
+        }
+      });
     // if both the password doesn't match
     if (req.body.password != req.body.confirm_password) {
       req.flash("error", "Password does not match");

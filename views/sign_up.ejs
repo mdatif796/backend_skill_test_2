@@ -8,6 +8,9 @@
             <input type="email" name="email" placeholder="Your Email" required>
             <input type="password" name="password" placeholder="Your Password" required>
             <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            
+      <!-- div to show reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey=<%= site_key %> ></div>
             <button>Sign Up</button>
         </form>
         <a id="a-google" href="/users/auth/google">

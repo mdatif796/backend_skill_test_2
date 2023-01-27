@@ -1,25 +1,31 @@
-<link rel="stylesheet" href="/css/sign_in.css">
+<link rel="stylesheet" href="/css/sign_in.css" />
 
 <div class="log-in-container">
-    <div class="log-in">
-        <h1 class="heading">Log In</h1>
-        <form action="/users/create-session" method="POST">
-            <input type="email" name="email" placeholder="Enter Email" required>
-            <input type="password" name="password" placeholder="Enter Password" required>
-            <a href="/users/sign-in/forget-password-page">Forgot Password</a>
-            <button>Log In</button>
-            <!-- <input type="submit" value="Sign In"> -->
-        </form>
-        <a id="a-google" href="/users/auth/google">
-            <div id="google-sign-in">
-                <div id="google-icon">
-                    <img src="/images/google.png" alt="">
-                </div>
-                <div id="google-name">
-                    <p>Sign in with google</p>
-                </div>
-            </div>
-        </a>
-        
-    </div> 
+  <div class="log-in">
+    <h1 class="heading">Log In</h1>
+    <form action="/users/create-session" method="POST">
+      <input type="email" name="email" placeholder="Enter Email" required />
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        required
+      />
+      <a href="/users/sign-in/forget-password-page">Forgot Password</a>
+      <!-- div to show reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey=<%= site_key %> ></div>
+      <button>Log In</button>
+      <!-- <input type="submit" value="Sign In"> -->
+    </form>
+    <a id="a-google" href="/users/auth/google">
+      <div id="google-sign-in">
+        <div id="google-icon">
+          <img src="/images/google.png" alt="" />
+        </div>
+        <div id="google-name">
+          <p>Sign in with google</p>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
